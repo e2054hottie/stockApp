@@ -1,0 +1,5 @@
+__pycache__/
+service/__pycache__
+controller/__pycache__
+config/__pycache__
+service/apikey.txt

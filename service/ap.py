@@ -4,7 +4,10 @@ import google.generativeai as genai
 
 import json
 
-genai.configure(api_key="AIzaSyDMAe8YxqQ82RQvODPzvcdfaFUJ55f_cbE")
+with open('service/apikey.txt', 'r', encoding='utf-8') as file:
+    key = file.read()
+
+genai.configure(api_key=key)
 
 model = genai.GenerativeModel('gemini-1.5-pro-latest')
 
