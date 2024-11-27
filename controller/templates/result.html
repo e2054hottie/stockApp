@@ -1,1 +1,67 @@
-{{ insert_something }}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONをテーブルに変換</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="companyName"></h1>
+    <table id="jsonTable"></table>
+
+    <script>
+        // JSONデータからテーブルを生成する関数
+        function createTableFromJSON(data) {
+            const table = document.getElementById('jsonTable');
+
+            document.getElementById("companyName").innerText=`${data.企業名}`;
+
+            // ヘッダー行を追加
+            const headerRow = document.createElement('tr');
+            headerRow.innerHTML = `
+                <th>カテゴリ</th>
+                <th>スコア</th>
+                <th>理由</th>
+            `;
+            table.appendChild(headerRow);
+
+            // 各カテゴリのデータ行を追加
+            for (const [category, value] of Object.entries(data)) {
+                if (category === "企業名") continue; // 企業名はスキップ
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${category}</td>
+                    <td>${value.score}</td>
+                    <td>${value.because}</td>
+                `;
+                table.appendChild(row);
+            }
+        }
+
+        const obj = {{ insert_something  | safe }}
+        // JSONデータからテーブルを生成
+        createTableFromJSON(obj);
+    </script>
+</body>
+
+</html>

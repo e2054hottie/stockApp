@@ -4,12 +4,13 @@ import google.generativeai as genai
 
 import json
 
+# apiKeyを読み込む
 with open('service/apikey.txt', 'r', encoding='utf-8') as file:
     key = file.read()
 
 genai.configure(api_key=key)
 
-model = genai.GenerativeModel('gemini-1.5-pro-latest')
+model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
 def test(code):
     query = ('あなたは株式投資に関する優秀なAIアシスタントです．'
@@ -25,6 +26,19 @@ def test(code):
     '[keisiki] 総評(100文字以内)，配当の累進性 点数 理由，配当の持続性 点数 理由，株価の上昇期待度 点数 理由'
     )
     
+    responce = model.generate_content(query)
+    
+    return  responce.text
+
+def test2(data):
+    # ファイル名を指定
+    file_path = "service/pronpt1.txt"  # 読み取りたいPythonファイルのパス
+
+    # ファイルを開いて内容を読み取る
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+    query = content + f'{data}'
+
     responce = model.generate_content(query)
     
     return  responce.text
