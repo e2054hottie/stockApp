@@ -17,3 +17,8 @@ class LoginController:
                 return redirect("/top")
         else:
             return render_template('login.html')
+    
+    @app.route("/logout")
+    def logout():
+        logout_user()
+        return render_template('login.html')

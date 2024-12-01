@@ -1,0 +1,2 @@
+insert into expenses(user_id,item,category,description,price,expense_date) 
+    Values(/* expense.user_id */,/* expense.item */,/* expense.category */,/* expense.description */, /* expense.price */, /* expense.expense_date */)

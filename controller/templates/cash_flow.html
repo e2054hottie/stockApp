@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>収入と支出の管理</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">資産管理アプリ</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ホーム</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">資産一覧</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">取引履歴</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">収入と支出 <span class="sr-only">(現位置)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">設定</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ログアウト</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">収入と支出の管理</h1>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="income-tab" data-toggle="tab" href="#income" role="tab" aria-controls="income" aria-selected="true">収入</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="expense-tab" data-toggle="tab" href="#expense" role="tab" aria-controls="expense" aria-selected="false">支出</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="monthly-summary-tab" data-toggle="tab" href="#monthly-summary" role="tab" aria-controls="monthly-summary" aria-selected="false">月ごとの収支</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <!-- 収入のタブここから -->
+            <div class="tab-pane fade show active" id="income" role="tabpanel" aria-labelledby="income-tab">
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h2>収入の追加</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="incomeAmount">金額</label>
+                                <input type="number" class="form-control" id="incomeAmount" placeholder="金額を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="incomeSource">収入源</label>
+                                <input type="text" class="form-control" id="incomeSource" placeholder="収入源を入力">
+                            </div>
+                            <button type="submit" class="btn btn-primary">追加</button>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2>収入一覧</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">金額</th>
+                                    <th scope="col">収入源</th>
+                                    <th scope="col">日付</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 収入データをここに追加 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- 収入のタブここまで -->
+
+            <div class="tab-pane fade" id="expense" role="tabpanel" aria-labelledby="expense-tab">
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h2>支出の追加</h2>
+                        <form method="post" action="/cf/regist_expenditure">
+                            <div class="form-group">
+                                <label for="item">項目</label>
+                                <input type="text" class="form-control" id="item" name="item" placeholder="項目を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="category">カテゴリ</label>
+                                <select class="form-control" id="category" name="category">
+                                    <option value="1">食費</option>
+                                    <option value="2">交通費</option>
+                                    <option value="3">日用品</option>
+                                    <option value="4">家賃</option>
+                                    <option value="5">教育</option>
+                                    <option value="6">趣味</option>
+                                    <option value="7">その他</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">説明</label>
+                                <input type="text" class="form-control" id="description" name="description" placeholder="説明を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">説明</label>
+                                <input type="text" class="form-control" id="price" name="price" placeholder="金額を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="expense_date">日付</label>
+                                <input type="date" class="form-control" id="expense_date" name="expense_date" placeholder="日付を入力">
+                            </div>
+                            <button type="submit" class="btn btn-primary">追加</button>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2>支出一覧</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">金額</th>
+                                    <th scope="col">カテゴリ</th>
+                                    <th scope="col">日付</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 支出データをここに追加 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade show active" id="monthly-summary" role="tabpanel" aria-labelledby="monthly-summary-tab">
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h2>月ごとの収支</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="month">月を選択</label>
+                                <select class="form-control" id="month" name="month">
+                                    <option value="2024-01">2024年1月</option>
+                                    <option value="2024-02">2024年2月</option>
+                                    <option value="2024-03">2024年3月</option>
+                                    <!-- 他の月も追加 -->
+                                </select>
+                            </div>
+                        </form>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">月</th>
+                                    <th scope="col">収入合計</th>
+                                    <th scope="col">支出合計</th>
+                                    <th scope="col">収支</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2024年1月</td>
+                                    <td>¥150,000</td>
+                                    <td>¥15,000</td>
+                                    <td>¥135,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3>収支の詳細</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">項目</th>
+                                    <th scope="col">金額</th>
+                                    <th scope="col">カテゴリ</th>
+                                    <th scope="col">日付</th>
+                                    <th scope="col">説明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for expense in expenses %}
+                                <tr>
+                                    <td>{{ expense.item }}</td>
+                                    <td>{{ expense.price }}</td>
+                                    <td>{{ expense.category }}</td>
+                                    <td>{{ expense.expense_date }}</td>
+                                    <td>{{ expense.description }}</td>
+                                    
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>

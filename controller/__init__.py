@@ -15,9 +15,11 @@ login_manager.login_view = 'login'
 @login_manager.user_loader
 def load_user(id):
     userDao = UserDao()
+    id = int(id)
     return userDao.user_select(id)
 
 import controller.top
 import controller.cf
 import controller.signup
 import controller.login
+import controller.asset_manangement

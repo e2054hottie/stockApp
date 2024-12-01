@@ -2,10 +2,13 @@ from databaseMappingFlamework.databaseMapping import select
 
 
 class UserDao:
-    @select("User")
+    @select("User",True)
     def user_select(self,id):
         pass
 
+    @select("User")
+    def sel(self,user):
+        pass
     @select("User",True)
     def user_select_by_email(self,email):
         pass

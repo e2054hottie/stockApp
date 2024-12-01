@@ -52,7 +52,6 @@ def get_sql(func,class_name,args, kwargs):
     
     # 仮引数名と実引数の対応
     param_dict = {param_names[i]: arg for i, arg in enumerate(args)}
-    print("dict=",param_dict)
 
     # デフォルト値を持つパラメータを追加
     for name in param_dict:
@@ -62,16 +61,22 @@ def get_sql(func,class_name,args, kwargs):
     # sql内部の変数を置き換える
     return sql 
 
-def select(class_name,only_one=False):
+def select(class_name,only_one=False,defaultSQL=None):
+    print("select")
     def outwrapper(func):
         def wrapper(*args, **kwargs):
             # sql文を作成
-            sql = get_sql(func,get_class(args),args,kwargs)
+            if defaultSQL is None:
+                sql = get_sql(func,get_class(args),args,kwargs)
+            else:
+                sql = defaultSQL
 
             print("executedSQL=[\"",sql,"\"]")
             conn = DatabaseConnection()
             result = conn.exec(sql)
-            result = ClassFactory.generate_list(class_name,result)
+
+            if result is not None:
+                result = ClassFactory.generate_list(class_name,result)
             
             # 結果が一つであることを期待している場合
             if only_one :

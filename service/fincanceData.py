@@ -40,10 +40,12 @@ def get_financial_data(ticker):
     # 利回りをパーセンテージに変換
     if dividend_yield is not None:
         dividend_yield *= 100
+
+
    
     # データをまとめる
     data = {
-        "name":stock.info["longName"],
+        "name":"name",
         "financials": financials,
         "balance_sheet": balance_sheet,
         "cashflow": cashflow,

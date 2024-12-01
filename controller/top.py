@@ -12,6 +12,12 @@ class TopController:
     @app.route('/top')
     def top():
         return render_template("top.html")
+    
+    @app.route('/analies/stock')
+    def analies_stock():
+        code = request.args.get('code')
+        code = code + ".T"
+        return render_template('result.html',insert_something = ap.test2(fincanceData.get_financial_data(code)))
 
     @app.route('/sampleform-post', methods=['POST'])
     def sample_form_temp():

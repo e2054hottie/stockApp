@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資産管理</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">資産管理アプリ</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ホーム</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">資産一覧</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">取引履歴</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">収入と支出</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">資産管理 <span class="sr-only">(現位置)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">設定</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ログアウト</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">資産管理</h1>
+
+
+
+        <ul class="nav nav-tabs" id="assetTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="cash-tab" data-toggle="tab" href="#cash" role="tab" aria-controls="cash"
+                    aria-selected="true">現預金</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="stocks-tab" data-toggle="tab" href="#stocks" role="tab" aria-controls="stocks"
+                    aria-selected="false">株式</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="mutual-funds-tab" data-toggle="tab" href="#mutual-funds" role="tab"
+                    aria-controls="mutual-funds" aria-selected="false">投資信託</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="assetTabContent">
+            <div class="tab-pane fade show active" id="cash" role="tabpanel" aria-labelledby="cash-tab">
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h2>現預金の追加</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="cashAmount">金額</label>
+                                <input type="number" class="form-control" id="cashAmount" placeholder="金額を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="cashDescription">説明</label>
+                                <input type="text" class="form-control" id="cashDescription" placeholder="説明を入力">
+                            </div>
+                            <button type="submit" class="btn btn-primary">追加</button>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2>現預金一覧</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">金額</th>
+                                    <th scope="col">説明</th>
+                                    <th scope="col">日付</th>
+                                    <th scope="col">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 現預金データをここに追加 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="stocks" role="tabpanel" aria-labelledby="stocks-tab">
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h2>株式の追加</h2>
+                        <form method="POST" action="/am">
+                            <div class="form-group">
+                                <label for="stockName">銘柄コード</label>
+                                <input type="text" class="form-control" id="stockCode" name="code" placeholder="銘柄名を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="stockAmount">株数</label>
+                                <input type="number" class="form-control" id="stockAmount" name="quantity"
+                                    placeholder="株数を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="stockPurchasePrice">取得単価</label>
+                                <input type="number" class="form-control" id="stockPurchasePrice"
+                                    name="acquisition_price" placeholder="取得単価を入力">
+                            </div>
+                            <button type="submit" class="btn btn-primary">追加</button>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2>株式一覧</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">銘柄コード</th>
+                                    <th scope="col">株数</th>
+                                    <th scope="col">取得単価</th>
+                                    <th scope="col">時価</th>
+                                    <th scope="col">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for stock in stocks %}
+                                <tr>
+                                    <td>{{ stock.code }}</td>
+                                    <td>{{ stock.quantity }}</td>
+                                    <td>{{ stock.acquisition_price }}</td>
+                                    <td> </td>
+                                    <td> <a href="/analies/stock?code={{ stock.code }}"> 銘柄を分析 </a> </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="mutual-funds" role="tabpanel" aria-labelledby="mutual-funds-tab">
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h2>投資信託の追加</h2>
+                        <form method="POST" action="/am">
+                            <div class="form-group">
+                                <label for="fundName">ファンド名</label>
+                                <input type="text" class="form-control" id="fundName" placeholder="ファンド名を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="fundAmount">口数</label>
+                                <input type="number" class="form-control" id="fundAmount" placeholder="口数を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="fundPurchasePrice">取得単価</label>
+                                <input type="number" class="form-control" id="fundPurchasePrice" placeholder="取得単価を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="fundCurrentPrice">時価</label>
+                                <input type="number" class="form-control" id="fundCurrentPrice" placeholder="時価を入力">
+                            </div>
+                            <button type="submit" class="btn btn-primary">追加</button>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2>投資信託一覧</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ファンド名</th>
+                                    <th scope="col">口数</th>
+                                    <th scope="col">取得単価</th>
+                                    <th scope="col">時価</th>
+                                    <th scope="col">日付</th>
+                                    <th scope="col">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 投資信託データをここに追加 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

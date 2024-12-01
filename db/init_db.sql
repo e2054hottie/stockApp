@@ -12,13 +12,14 @@ CREATE TABLE users (
 -- 支出
 CREATE TABLE expenses (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id VARCHAR(16) NOT NULL,
+    user_id INT NOT NULL,
     item VARCHAR(16),
     category INT ,
     description VARCHAR(255),
+    price INT,
     expense_date DATE NOT NULL,
-    created_at TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    -- FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (category) REFERENCES common_expenses_category(id)
 );
 
@@ -61,6 +62,7 @@ CREATE TABLE bank(
 CREATE TABLE stock(
     id INT AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(8),
+    name, VARCHAR(64),
     user_id INT, 
     acquisition_price INT, -- 取得単価
     quantity INT ,
@@ -89,6 +91,7 @@ CREATE TABLE invest_trust(
 );
 
 INSERT INTO common_expenses_category(category_name) VALUES("食費");
+INSERT INTO common_expenses_category(category_name) VALUES("交通費");
 INSERT INTO common_expenses_category(category_name) VALUES("日用品");
 INSERT INTO common_expenses_category(category_name) VALUES("家賃");
 INSERT INTO common_expenses_category(category_name) VALUES("教育");
