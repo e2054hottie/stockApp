@@ -1,9 +1,6 @@
-from flask import Flask
-from flask_login import LoginManager
 from dao.userDao import UserDao
-app = Flask(__name__)
-app.secret_key = 'secretekyeofstock'
-
+from flask_login import LoginManager
+from controller.__init__ import app
 #インスタンス化
 login_manager = LoginManager()
 #アプリをログイン機能を紐付ける
@@ -16,8 +13,3 @@ login_manager.login_view = 'login'
 def load_user(id):
     userDao = UserDao()
     return userDao.user_select(id)
-
-import controller.top
-import controller.cf
-import controller.signup
-import controller.login

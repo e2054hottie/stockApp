@@ -3,112 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSONをテーブルに変換</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-    </style>
+    <title>資産管理アプリ</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>ジャパン・タバコの評価</h1>
-    <table id="jsonTable"></table>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">資産管理アプリ</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">ホーム <span class="sr-only">(現位置)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">資産一覧</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">取引履歴</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">設定</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ログアウト</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <script>
-        // JSONデータからテーブルを生成する関数
-        function createTableFromJSON(data) {
-            const table = document.getElementById('jsonTable');
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">ようこそ、資産管理アプリへ！</h1>
+            <p class="lead">ここではあなたの資産を簡単に管理できます。</p>
+            <hr class="my-4">
+            <p>資産の追加や取引履歴の確認が簡単に行えます。</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">資産を追加</a>
+        </div>
 
-            // 企業名の行を追加
-            const companyRow = document.createElement('tr');
-            companyRow.innerHTML = `
-                <th colspan="3">企業名</th>
-                <td colspan="3">${data.企業名}</td>
-            `;
-            table.appendChild(companyRow);
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">総資産</h5>
+                        <p class="card-text">¥1,000,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">今月の収入</h5>
+                        <p class="card-text">¥200,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">今月の支出</h5>
+                        <p class="card-text">¥150,000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            // ヘッダー行を追加
-            const headerRow = document.createElement('tr');
-            headerRow.innerHTML = `
-                <th>カテゴリ</th>
-                <th>スコア</th>
-                <th>理由</th>
-            `;
-            table.appendChild(headerRow);
-
-            // 各カテゴリのデータ行を追加
-            for (const [category, value] of Object.entries(data)) {
-                if (category === "企業名") continue; // 企業名はスキップ
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${category}</td>
-                    <td>${value.score}</td>
-                    <td>${value.because}</td>
-                `;
-                table.appendChild(row);
-            }
-        }
-
-        // JSONデータからテーブルを生成
-        createTableFromJSON(jsonData);
-    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-<body>
-    <h1>資産トップ</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
-        </tbody>
-    </table>
-</body>
-
 </html>

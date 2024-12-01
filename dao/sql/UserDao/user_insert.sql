@@ -1,0 +1,1 @@
+INSERT INTO users(username,email,pass) VALUES(/* name */,/* email */,/* password */);
