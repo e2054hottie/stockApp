@@ -26,8 +26,10 @@ class DatabaseConnection:
 
         try:
             cursor.execute(sql)
-        except:
+        except Exception as e:
             self.conn.rollback()
+            print(f'{e}')
+            return 
         self.conn.commit()
 
         # 結果の取得

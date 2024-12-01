@@ -1,0 +1,1 @@
+select * from stock where user_id = /* id */

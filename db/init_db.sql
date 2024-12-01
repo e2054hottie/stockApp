@@ -74,7 +74,7 @@ CREATE TABLE yeild(
     stock_id INT,
     cumulative_dividend INT,
     FOREIGN KEY (stock_id) REFERENCES stock(id)
-)
+);
 
 -- 投資信託
 CREATE TABLE invest_trust(
@@ -88,14 +88,14 @@ CREATE TABLE invest_trust(
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-INSERT INTO common_expenses_category("食費");
-INSERT INTO common_expenses_category("日用品");
-INSERT INTO common_expenses_category("家賃");
-INSERT INTO common_expenses_category("教育");
-INSERT INTO common_expenses_category("趣味");
-INSERT INTO common_expenses_category("その他");
+INSERT INTO common_expenses_category(category_name) VALUES("食費");
+INSERT INTO common_expenses_category(category_name) VALUES("日用品");
+INSERT INTO common_expenses_category(category_name) VALUES("家賃");
+INSERT INTO common_expenses_category(category_name) VALUES("教育");
+INSERT INTO common_expenses_category(category_name) VALUES("趣味");
+INSERT INTO common_expenses_category(category_name) VALUES("その他");
 
-INSERT INTO common_income_category("給料");
-INSERT INTO common_income_category("立替");
-INSERT INTO common_income_category("資産");
-INSERT INTO common_income_category("その他");
+INSERT INTO common_income_category(category_name) VALUES("給料");
+INSERT INTO common_income_category(category_name) VALUES("立替");
+INSERT INTO common_income_category(category_name) VALUES("資産");
+INSERT INTO common_income_category(category_name) VALUES("その他");
