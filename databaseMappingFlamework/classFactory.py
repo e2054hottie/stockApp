@@ -24,6 +24,7 @@ class ClassFactory:
 
             # ディクショナリのキーと値をインスタンスの属性に設定
             for key, value in data.items():
+                key = key.replace(".","_")
                 setattr(instance, key, value)
 
             return instance

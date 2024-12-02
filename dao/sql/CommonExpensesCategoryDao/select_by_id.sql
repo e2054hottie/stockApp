@@ -1,0 +1,1 @@
+select * from common_expenses_categoryDao where id = /* id */

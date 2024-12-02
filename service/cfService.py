@@ -28,10 +28,7 @@ class CfService:
         self.expenseDao.insert(expens)
         print("ex")
 
-    def get_expenses(self,use_id):
-        result = self.expenseDao.select_all()
-        
-        for r in result:
-            print(r)
+    def get_expenses(self,user_id):
+        result = self.expenseDao.select_wiht_name_by_user_id(int(user_id))
         
         return result

@@ -1,7 +1,4 @@
-from entity.auto_str import auto_str
-
-@auto_str
-class Expense:
+class ExpenseWithCatName:
     def __init__(self):
         self.id  = None
         self.user_id  = None
@@ -11,6 +8,3 @@ class Expense:
         self.price = None
         self.expense_date = None 
         self.created_at = None
-    
-    def to_table(lst:list):
-

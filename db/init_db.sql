@@ -90,13 +90,22 @@ CREATE TABLE invest_trust(
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-INSERT INTO common_expenses_category(category_name) VALUES("食費");
-INSERT INTO common_expenses_category(category_name) VALUES("交通費");
-INSERT INTO common_expenses_category(category_name) VALUES("日用品");
-INSERT INTO common_expenses_category(category_name) VALUES("家賃");
-INSERT INTO common_expenses_category(category_name) VALUES("教育");
-INSERT INTO common_expenses_category(category_name) VALUES("趣味");
-INSERT INTO common_expenses_category(category_name) VALUES("その他");
+INSERT INTO common_expenses_category(id,category_name) 
+    VALUES(1,"食費");
+INSERT INTO common_expenses_category(id,category_name) 
+    VALUES(2,"交通費");
+INSERT INTO common_expenses_category(id,category_name) 
+    VALUES(3,"日用品");
+INSERT INTO common_expenses_category(id,category_name) 
+    VALUES(4,"家賃");
+INSERT INTO common_expenses_category(id,category_name) 
+    VALUES(5,"教育");
+INSERT INTO common_expenses_category(id,category_name) 
+    VALUES(6,"趣味");
+INSERT INTO common_expenses_category(id,category_name) 
+    VALUES(7,"通信費");
+INSERT INTO common_expenses_category(id,category_name) 
+    VALUES(8,"その他");
 
 INSERT INTO common_income_category(category_name) VALUES("給料");
 INSERT INTO common_income_category(category_name) VALUES("立替");
