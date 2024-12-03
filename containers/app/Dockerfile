@@ -12,6 +12,7 @@ RUN pip install -q -U google-generativeai
 RUN pip install pymysql
 RUN pip install cryptography 
 RUN pip install flask-login
+RUN pip install lark
 
 # ポートの公開
 EXPOSE 5000

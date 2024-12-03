@@ -1,0 +1,43 @@
+?start: statement+
+
+statement: select_stmt
+         | update_stmt
+         | insert_stmt
+         | delete_stmt
+
+select_stmt: "SELECT" (aster | column_list) "FROM" CNAME (conditional_where_clause | conditional)?
+update_stmt: "UPDATE" CNAME "SET" assignment_list (conditional_where_clause)?
+insert_stmt: "INSERT INTO" CNAME "(" column_list ")" "VALUES" "(" value_list ")"
+delete_stmt: "DELETE FROM" CNAME (conditional_where_clause)?
+
+column_list: CNAME ("," CNAME)*
+aster: "*"
+assignment_list: assignment ("," assignment)*
+assignment: CNAME "=" value
+value_list: value ("," value)*
+conditional_where_clause: "/*%if" expression "*/" "WHERE" conditions "/*%end" "*/"
+conditional: "WHERE" conditions
+conditions: condition ("," condition)*
+condition: CNAME "=" value | expression
+
+value: ESCAPED_STRING | SIGNED_NUMBER | placeholder
+placeholder: "/*" expression "*/"
+
+expression: or_expr
+or_expr: and_expr ("or" and_expr)*
+and_expr: not_expr ("and" not_expr)*
+not_expr: "not" not_expr | comparison
+comparison: term (comp_op term)?
+term: factor (add_op factor)*
+factor: atom (mul_op atom)*
+atom: chained_name | SIGNED_NUMBER | ESCAPED_STRING | "(" expression ")"
+chained_name: CNAME ("." CNAME)*
+comp_op: "==" | "!=" | "<" | ">" | "<=" | ">="
+add_op: "+" | "-"
+mul_op: "*" | "/"
+
+%import common.CNAME
+%import common.ESCAPED_STRING
+%import common.SIGNED_NUMBER
+%import common.WS
+%ignore WS

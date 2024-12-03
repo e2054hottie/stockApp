@@ -11,6 +11,4 @@ class Expense:
         self.price = None
         self.expense_date = None 
         self.created_at = None
-    
-    def to_table(lst:list):
-
+    5
